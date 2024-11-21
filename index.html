@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="connect-src 'self' http://127.0.0.1:8188 ws://127.0.0.1:8188 http://127.0.0.1:7860 http://127.0.0.1:1234 http://localhost:5173" >
+    
+
+    <title>Zet ze aan tafel</title>
+
+    <script src="./src/front-end/features/LLM_interaction/llm_test.js" type="module"></script>
+    <script src="./src/front-end/features/image_generation/image_generation.js" type="module"></script>
+    <script src="./src/front-end/features/LLM_interaction/generation_prompts.js" type="module"></script>
+
+  </head>
+  <body>
+    <textarea value="" id="prompt_input" name="prompt_input" placeholder="input prompt here"></textarea>
+    <textarea value="" id="input_reflection" name="input_reflection" placeholder="input reflection input here"></textarea>
+
+    <label for="cfg_input">set cfg</label><br>
+    <input type="range" id="cfg_input" name="cfg_input" min="1" max="20" step="1" value="8"/>
+    <p>Strictheid: <output id="cfg_value"></output></p>
+    
+    <label for="seed_input">random seed</label><br>
+    <input type="checkbox" id="seed_input" name="seed_input" value="random">
+        
+    <button type="button" id="prompt_trigger">Generate image</button>
+  
+    <button type="button" id="llm_test">LLM test</button>
+
+    <button type="button" id="transcript_test">Transcript test</button>
+
+    <img width= "1080" height= "720" id="generated_image"/>
+
+    <script type="module" src="/src/front-end/renderer.js"></script>
+  </body>
+</html>
