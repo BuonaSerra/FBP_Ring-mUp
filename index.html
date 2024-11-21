@@ -13,17 +13,24 @@
 
   </head>
   <body>
-    <textarea value="" id="prompt_input" name="prompt_input" placeholder="input prompt here"></textarea>
+    <label for="prompt_input">Select an agent:</label>
+    <select name="agents" id="prompt_input">
+      <option value="">--Please choose an option--</option>
+      <option value="Einstein">Einstein</option>
+      <option value="Socrates">Socrates</option>
+    </select>
     <textarea value="" id="input_reflection" name="input_reflection" placeholder="input reflection input here"></textarea>
 
-    <label for="cfg_input">set cfg</label><br>
+    
+
+    <!--<label for="cfg_input">set cfg</label><br>
     <input type="range" id="cfg_input" name="cfg_input" min="1" max="20" step="1" value="8"/>
     <p>Strictheid: <output id="cfg_value"></output></p>
     
     <label for="seed_input">random seed</label><br>
     <input type="checkbox" id="seed_input" name="seed_input" value="random">
         
-    <button type="button" id="prompt_trigger">Generate image</button>
+    <button type="button" id="prompt_trigger">Generate image</button>-->
   
     <button type="button" id="llm_test">LLM test</button>
 

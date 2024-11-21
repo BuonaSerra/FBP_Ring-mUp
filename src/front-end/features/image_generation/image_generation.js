@@ -1,41 +1,19 @@
+//This code is edited from original typescript code by Wesley Hartogs
 import workflow from './workflow_api_v1.json' with {type: 'json'};
-
-/*async function getData() {
-    const url = 'http://127.0.0.1:8188/prompt';
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-  
-      const json = await response.json();
-      console.log(json);
-    } catch (error) {
-      console.error(error.message);
-    }
-  }*/
-/*var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-  function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-  return new (P || (P = Promise))(function (resolve, reject) {
-      function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-      function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-      function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};*/
 
 
 export var responseId = ""; //lege variabele waarin de promptid wordt gezet
 export var remainingQueue;
 
-export const cfgValue = document.getElementById('cfg_value');
+//getting value from cfg slider and updating value in DOM
+/*export const cfgValue = document.getElementById('cfg_value');
 export const cfgSlider = document.getElementById('cfg_input');
 cfgValue.textContent = cfgSlider.value; //update cfg value constantly, so it gives live feedback on the slider
 cfgSlider.addEventListener("input", (event) => {
   cfgValue.textContent = event.target.value;
-});
+});*/
 
-document.getElementById('prompt_trigger').addEventListener('click', postData); //start functie postData, zodra op de knop is geklikt
+//document.getElementById('prompt_trigger').addEventListener('click', postData); //start functie postData, zodra op de knop is geklikt
 
 //open a websocket to be able to get status/execution messages
 export const serverUrl = "127.0.0.1:8188";
@@ -98,19 +76,19 @@ export async function handleMessage(message) { //receives and sorts any event me
 
     //asynchrone functie om een post request te sturen naar de api
   export async function postData(agentPrompt) {
-    var promptInput = document.getElementById("prompt_input").value //get the value from the textarea prompt_input
+    /*var promptInput = document.getElementById("prompt_input").value //get the value from the textarea prompt_input
     var cfgInput = document.getElementById("cfg_input").value //get the value from the number input cfg_input
-    var seedInput = document.getElementById("seed_input") //get the value from the number input seed_input
+    var seedInput = document.getElementById("seed_input") //get the value from the number input seed_input*/
 
     workflow["6"]["inputs"]["text"] = agentPrompt;
     //workflow["6"]["inputs"]["text"] = promptInput; //input the prompt value into the right JSON object name
-    workflow["3"]["inputs"]["cfg"] = cfgInput; //input the cfg value into the right JSON object name
+    //workflow["3"]["inputs"]["cfg"] = cfgInput; //input the cfg value into the right JSON object name
 
-    if (seedInput.checked == true){ //checkt of de seedinput checkbox op random staat. Als dat zo is, genereert het een random nummer tussen 1 en 987654321 als seed. Anders is de seed 2.
+    /*if (seedInput.checked == true){ //checkt of de seedinput checkbox op random staat. Als dat zo is, genereert het een random nummer tussen 1 en 987654321 als seed. Anders is de seed 2.
       workflow["3"]["inputs"]["seed"] = Math.floor(Math.random() * 9876543210) + 1; 
     } else {
       workflow["3"]["inputs"]["seed"] = 2;
-    }
+    }*/
 
     const url = 'http://127.0.0.1:8188/prompt'; //api url + enpoint (/prompt), zie server.py in comfyui om andere endpoints te vinden
     const clientId = 5//randomUUID() //kan berekend worden, even in duiken
