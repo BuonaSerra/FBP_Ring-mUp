@@ -3,11 +3,8 @@ import { pipeline, env } from '@huggingface/transformers';
 
 env.allowLocalModels = false;
 env.allowRemoteModels = true;
-//env.localModelPath = './models/whisper-base/';
-//const modelPath = './models/whisper-base/';
 
-
-const transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisper-base', {
+/*const transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisper-base', {
     dtype: {
         encoder_model: 'fp32',
         decoder_model_merged: 'fp32',
@@ -16,7 +13,7 @@ const transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisp
 });
 const url = 'https://huggingface.co/datasets/Xenova/transformers.js-docs/resolve/main/jfk.wav';
 const output = await transcriber(url);
-console.log(output);
+console.log(output);*/
 
 // env.useBrowserCache = false;
  
@@ -25,7 +22,7 @@ console.log(output);
  
 //const transcriber;
  
-/*const loadingModel = ref(false);
+const loadingModel = ref(false);
  
 //const selectedWords = ref<string[]>([]);
 //const availableWords = ref<string[]>([]);
@@ -43,7 +40,7 @@ const props = defineProps({ //copied from codeium
 });
  
 const emit = defineEmits(['finish', 'cancel']);
-onMounted();
+onMounted;
  
 onMounted(async () => {
     numTranscribed.value = 0;
@@ -64,7 +61,7 @@ const transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisp
         encoder_model: 'fp32',
         decoder_model_merged: 'fp32',
     },
-    device: 'cuda'
+    device: 'webgpu'
 });
  
 async function checkWasmInCache() {
@@ -162,7 +159,7 @@ const transcribe = async () => {
  
     try {
         let tempOutput = await transcriber(url, {
-            language: props.language == 'dut' ? 'dutch' : 'english',
+            language: 'dutch',
             task: 'transcribe',
             chunk_length_s: 30,
             stride_length_s: 5
@@ -184,4 +181,4 @@ const transcribe = async () => {
 }
 
 document.getElementById('start_recording').addEventListener('click', startRecording);
-document.getElementById('stop_recording').addEventListener('click', stopRecording);*/
+document.getElementById('stop_recording').addEventListener('click', stopRecording);
