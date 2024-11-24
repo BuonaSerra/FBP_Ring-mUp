@@ -20,15 +20,16 @@ console.log(output);*/
 
 // env.backends.onnx.wasm.wasmPaths = wasmFile;
  
-//const transcriber;
+//const transcriber = ref(null);
  
 const loadingModel = ref(false);
+var conversationTranscript = ''; 
  
 //const selectedWords = ref<string[]>([]);
 //const availableWords = ref<string[]>([]);
 const numTranscribed = ref(0);
  
-const props = defineProps({ //copied from codeium
+const props = defineProps({ 
     language: {
         type: String,
         required: true
@@ -40,7 +41,7 @@ const props = defineProps({ //copied from codeium
 });
  
 const emit = defineEmits(['finish', 'cancel']);
-onMounted;
+
  
 onMounted(async () => {
     numTranscribed.value = 0;
@@ -51,11 +52,12 @@ onMounted(async () => {
  
     loadingModel.value = true;
     
+    
     loadingModel.value = false;
     console.log('model loaded');
  
 })
- 
+
 const transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisper-base', {
     dtype: {
         encoder_model: 'fp32',
@@ -63,6 +65,9 @@ const transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisp
     },
     device: 'webgpu'
 });
+
+ 
+
  
 async function checkWasmInCache() {
     if ('caches' in window) {
@@ -176,9 +181,13 @@ const transcribe = async () => {
  
     const end = performance.now();
  
-    console.log('transcribe', transcribeOutput.value);
+    console.log(transcribeOutput.value);
     numTranscribed.value++;
+    conversationTranscript = transcribeOutput.value;
+    return conversationTranscript;
 }
+
+export {conversationTranscript};
 
 document.getElementById('start_recording').addEventListener('click', startRecording);
 document.getElementById('stop_recording').addEventListener('click', stopRecording);
