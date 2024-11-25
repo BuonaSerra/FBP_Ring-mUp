@@ -1,6 +1,6 @@
 import { prompt_llm, changeInput } from "./generation_prompts.js"; //prompt_llm, reflectionInput, 
 import { postData } from '../../features/Image_generation/image_generation';;
-//import {conversationTranscript} from '../../features/Speech_transcription/transcribings.js'
+import {conversationTranscript} from '../../features/Speech_transcription/transcribings.js'
 
 
 document.getElementById('llm_test').addEventListener('click', llmTest); //start functie llmTest, zodra op de knop is geklikt
@@ -9,7 +9,8 @@ async function llmTest() {
   const url = 'http://127.0.0.1:1234/v1/chat/completions'; //api url + endpoint
 
   const AgentChoice = document.getElementById("prompt_input").value
-  const inputReflection = document.getElementById("input_reflection").value
+  //const inputReflection = document.getElementById("input_reflection").value
+  const inputReflection = conversationTranscript;
 
   changeInput(inputReflection);
 
