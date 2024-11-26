@@ -7,7 +7,9 @@ document.getElementById('llm_test').addEventListener('click', pipelineStuff); //
 async function pipelineStuff(){
   const agent1 = document.getElementById("prompt_input1").value
   const agent2 = document.getElementById("prompt_input2").value
-  const agents = [[agent1, 'agent1'], [agent2, 'agent2']];
+  const agent3 = document.getElementById("prompt_input3").value
+  const agent4 = document.getElementById("prompt_input4").value
+  const agents = [[agent1, 'agent1'], [agent2, 'agent2'], [agent3, 'agent3'], [agent4, 'agent4']];
   console.log(agents);
   
   for (const Agent of agents){

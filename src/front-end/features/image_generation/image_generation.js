@@ -4,6 +4,7 @@ import workflow from './workflow_api_v1.json' with {type: 'json'};
 
 export var responseId = ""; //lege variabele waarin de promptid wordt gezet
 export var remainingQueue;
+var Reflection = "";
 
 //getting value from cfg slider and updating value in DOM
 /*export const cfgValue = document.getElementById('cfg_value');
@@ -124,6 +125,7 @@ export async function postData(agentPrompt, agentid, reflection) {
     const json = await response.json();
     console.log(json);
     responseId = json['prompt_id']
+    Reflection = reflection;
     //console.log(responseId, agentId, agentRef);
     datalog.push([agentId, responseId, agentRef]);
     console.log(datalog);
@@ -216,8 +218,10 @@ export async function convertImage(outputImages) {
 
       const newDiv = document.createElement("div");
       const imageEl = document.createElement("img");
+      const reflectionEl = document.createTextNode(Reflection);
       imageEl.src = imageUrl; 
       newDiv.appendChild(imageEl);
+      newDiv.appendChild(reflectionEl);
       document.body.appendChild(newDiv);
 
       //  const imageElement = document.createElement("img");
