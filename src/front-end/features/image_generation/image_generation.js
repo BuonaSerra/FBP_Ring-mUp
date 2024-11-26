@@ -17,12 +17,13 @@ cfgSlider.addEventListener("input", (event) => {
 
 //open a websocket to be able to get status/execution messages
 export const serverUrl = "127.0.0.1:8188";
-export const clientId = 5; //"agent-client-" + Math.random().toString(36).substring(2, 15);
+//export const clientId = 5; //"agent-client-" + Math.random().toString(36).substring(2, 15);
 let ws;
+var datalog = [];
 
 
 
-function openWebSocket() {
+function openWebSocket(clientId) {
   ws = new WebSocket(`ws://${serverUrl}/ws?clientId=${clientId}`);
   ws.onopen = () => {
     console.log("WebSocket opened");
@@ -33,6 +34,7 @@ function openWebSocket() {
   ws.onmessage = (event) => {
     handleMessage(event.data);
   };
+  
 }
 
 
@@ -42,15 +44,19 @@ export async function handleMessage(message) { //receives and sorts any event me
 
     console.log("RAW Message: ", message);
   }
-  console.log("function aangeroepen " + message.type)
+  //console.log("function aangeroepen " + message.type)
   switch (message.type) {
     case 'executing':
-      console.log("Executing...", message.data);
+      //console.log("Executing...", message.data);
       if (message.data.node == null) {
         console.log("Execution done");
+        console.log('start history');
+        const imagesOutput = (await getImages(responseId));
+        console.log(imagesOutput);
+        convertImage(imagesOutput);
       }
 
-      alert("ComfyUI is done executing");
+      //alert("ComfyUI is done executing");
       break;
     case 'execution_start':
       console.log("Execution started...", message.data);
@@ -61,11 +67,11 @@ export async function handleMessage(message) { //receives and sorts any event me
     case 'status':
       console.log("Status: ", message.data);
       console.log("Queue Remaining", message.data.status.exec_info.queue_remaining);
-      if (remainingQueue == 1 && message.data.status.exec_info.queue_remaining == 0) { //AANDACHT: bij gebrek aan message types is dit een oplossing voor later!! Dit is een workaround.
-        console.log('start history');
-        const imagesOutput = (await getImages(responseId));
-        console.log(imagesOutput);
-        convertImage(imagesOutput);
+      if (remainingQueue ==1  && message.data.status.exec_info.queue_remaining == 0) { //AANDACHT: bij gebrek aan message types is dit een oplossing voor later!! Dit is een workaround.
+        // console.log('start history');
+        // const imagesOutput = (await getImages(responseId));
+        // console.log(imagesOutput);
+        // convertImage(imagesOutput);
         //console.log(imageSrc);
       } else {
         remainingQueue = message.data.status.exec_info.queue_remaining;
@@ -75,7 +81,7 @@ export async function handleMessage(message) { //receives and sorts any event me
       console.log("Execution cached...", message.data);
       break;
     case 'progress':
-      console.log("Progress: ", `${message.data.value / message.data.max * 100}%`);
+      //console.log("Progress: ", `${message.data.value / message.data.max * 100}%`);
       break;
     default:
       console.log("Unknown message type: ", message);
@@ -85,11 +91,12 @@ export async function handleMessage(message) { //receives and sorts any event me
 
 
 //asynchrone functie om een post request te sturen naar de api
-export async function postData(agentPrompt) {
+export async function postData(agentPrompt, agentid, reflection) {
   /*var promptInput = document.getElementById("prompt_input").value //get the value from the textarea prompt_input
   var cfgInput = document.getElementById("cfg_input").value //get the value from the number input cfg_input
   var seedInput = document.getElementById("seed_input") //get the value from the number input seed_input*/
-
+  const agentId = agentid;
+  const agentRef = reflection;
   workflow["6"]["inputs"]["text"] = agentPrompt;
   //workflow["6"]["inputs"]["text"] = promptInput; //input the prompt value into the right JSON object name
   //workflow["3"]["inputs"]["cfg"] = cfgInput; //input the cfg value into the right JSON object name
@@ -101,7 +108,7 @@ export async function postData(agentPrompt) {
   }*/
 
   const url = 'http://127.0.0.1:8188/prompt'; //api url + enpoint (/prompt), zie server.py in comfyui om andere endpoints te vinden
-  const clientId = 5//randomUUID() //kan berekend worden, even in duiken
+  const clientId = agentid//randomUUID() //kan berekend worden, even in duiken
   try {
     const p = { prompt: workflow, client_id: clientId }; //combineer workflow met client id
     const request1 = new Request(url, {
@@ -117,10 +124,12 @@ export async function postData(agentPrompt) {
     const json = await response.json();
     console.log(json);
     responseId = json['prompt_id']
-    console.log(responseId);
+    //console.log(responseId, agentId, agentRef);
+    datalog.push([agentId, responseId, agentRef]);
+    console.log(datalog);
 
-    openWebSocket();
-
+    openWebSocket(clientId);
+    
 
   } catch (error) {
     console.error(error.message);
@@ -200,14 +209,22 @@ export async function convertImage(outputImages) {
       // Create the data URL
       const imageUrl = `data:image/jpeg;base64,${base64String}`;
       //console.log(imageUrl);
+      //console.log(imageUrl);
       //this.callback(imageUrl);
       //imageStuff = base64String;
-      document.getElementById("generated_image").src = imageUrl;
-      // const imageElement = document.createElement("img");
-      // imageElement.src = imageUrl;
+     // document.getElementById("generated_image").src = imageUrl;
+
+      const newDiv = document.createElement("div");
+      const imageEl = document.createElement("img");
+      imageEl.src = imageUrl; 
+      newDiv.appendChild(imageEl);
+      document.body.appendChild(newDiv);
+
+      //  const imageElement = document.createElement("img");
+      //  imageElement.src = imageUrl;
       // imageElement.style.width = "100%";
       // imageElement.style.height = "auto";
-      // document.body.appendChild(imageElement);
+      //  document.body.appendChild(imageElement);
     }
 
   }
