@@ -11,6 +11,9 @@
     <script src="./src/front-end/features/image_generation/image_generation.js" type="module"></script>
     <script src="./src/front-end/features/LLM_interaction/generation_prompts.js" type="module"></script>
     <script src="./src/front-end/features/Speech_transcription/transcribings.js" type="module"></script>
+
+    <script src="./src/front-end/features/Serial_test/serial_test.js" type="module"></script>
+
   </head>
   <body>
     <label for="prompt_input">Select an agent:</label>
@@ -31,6 +34,9 @@
     <input type="checkbox" id="seed_input" name="seed_input" value="random">
         
     <button type="button" id="prompt_trigger">Generate image</button>-->
+    <button type="button" id="serial_test">Test Serial</button>
+    <p>Matching Arduino Mega device: <strong id="device-name"></strong></p>
+
     <button type="button" id="start_recording">Start Recording</button>
 
     <button type="button" id="stop_recording">Stop Recording</button>

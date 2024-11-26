@@ -1,3 +1,5 @@
+//code altered from original typescript code of Wesley Hartogs
+
 import { onMounted, ref, defineProps, defineEmits } from 'vue';
 import { pipeline, env } from '@huggingface/transformers';
 
