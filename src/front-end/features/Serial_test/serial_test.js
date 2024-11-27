@@ -1,7 +1,7 @@
 
 
 //code from Google dev example https://developer.chrome.com/docs/capabilities/serial#read-port and electron example https://www.electronjs.org/docs/latest/tutorial/devices#web-serial-api
-
+import {startRecording, stopRecording} from '../../features/Speech_transcription/transcribings.js';
 export var uidAgent1;
 export var uidAgent2;
 
@@ -54,8 +54,10 @@ async function testIt () {
           //console.log(value);
           if (value == "start"){
             console.log("start recording");
+            startRecording();
           }else if(value == "stop"){
             console.log("stop recording");
+            stopRecording();
           }else{
             if(value.substring(0,7)=="reader1"){
               console.log("it's reader 1: " + value.substring(8,value.length));

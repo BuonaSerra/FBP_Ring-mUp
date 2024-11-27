@@ -3,7 +3,7 @@ import { postData } from '../../features/Image_generation/image_generation';;
 import {conversationTranscript} from '../../features/Speech_transcription/transcribings.js';
 import {uidAgent1, uidAgent2} from '../../features/Serial_test/serial_test.js';
 
-document.getElementById('llm_test').addEventListener('click', pipelineStuff); //start functie llmTest, zodra op de knop is geklikt
+//document.getElementById('llm_test').addEventListener('click', pipelineStuff); //start functie llmTest, zodra op de knop is geklikt
 
 async function uidAgentValue(uid){
   if (uid == '0xB9 0x4C 0x8B 0xFF'){
@@ -13,7 +13,7 @@ async function uidAgentValue(uid){
   }
 }
 
-async function pipelineStuff(){
+export async function pipelineStuff(){
   const agent1 = await uidAgentValue(uidAgent1);
   console.log(agent1);
   console.log(uidAgent1);

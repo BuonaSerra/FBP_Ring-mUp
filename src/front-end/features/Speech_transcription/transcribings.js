@@ -1,5 +1,5 @@
 //code altered from original typescript code of Wesley Hartogs
-
+import { pipelineStuff } from '../../features/LLM_interaction/llm_test.js';
 import { onMounted, ref, defineProps, defineEmits } from 'vue';
 import { pipeline, env } from '@huggingface/transformers';
 
@@ -96,7 +96,7 @@ const playback = ref(document.createElement('audio'));
 const isRecording = ref(false);
 const recordedChunks = ref([]);
  
-const startRecording = async () => {
+export const startRecording = async () => {
     console.log('startRecording');
     
     recordedChunks.value = [];
@@ -125,7 +125,7 @@ const startRecording = async () => {
     isRecording.value = true;
 }
  
-const stopRecording = async () => {
+export const stopRecording = async () => {
     console.log('stopRecording');
  
     if (recorder.value && recorder.value.state !== 'inactive') {
@@ -149,7 +149,8 @@ const stopRecording = async () => {
  
     recordedChunks.value = [];
  
-    transcribe()
+    await transcribe()
+    pipelineStuff();
 }
  
 const transcribing = ref(false);
@@ -191,5 +192,5 @@ const transcribe = async () => {
 
 export {conversationTranscript};
 
-document.getElementById('start_recording').addEventListener('click', startRecording);
-document.getElementById('stop_recording').addEventListener('click', stopRecording);
+// document.getElementById('start_recording').addEventListener('click', startRecording);
+// document.getElementById('stop_recording').addEventListener('click', stopRecording);
