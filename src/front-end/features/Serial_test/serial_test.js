@@ -1,7 +1,11 @@
 
 
 //code from Google dev example https://developer.chrome.com/docs/capabilities/serial#read-port and electron example https://www.electronjs.org/docs/latest/tutorial/devices#web-serial-api
-//testIt();
+
+export var uidAgent1;
+export var uidAgent2;
+
+
 class LineBreakTransformer {
   constructor() {
     // A container for holding stream data until a new line.
@@ -47,7 +51,21 @@ async function testIt () {
           }
           
           // value is a Uint8Array.
-          console.log(value);
+          //console.log(value);
+          if (value == "start"){
+            console.log("start recording");
+          }else if(value == "stop"){
+            console.log("stop recording");
+          }else{
+            if(value.substring(0,7)=="reader1"){
+              console.log("it's reader 1: " + value.substring(8,value.length));
+              uidAgent1= value.substring(8,value.length);
+            } else if(value.substring(0,7)=="reader2"){
+              console.log("it's reader 2: " + value.substring(8,value.length));
+              uidAgent2= value.substring(8,value.length);
+            }
+            
+          }
         }
         
         // const textDecoder = new TextDecoderStream();

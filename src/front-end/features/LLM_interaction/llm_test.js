@@ -1,14 +1,29 @@
 import { prompt_llm, changeInput } from "./generation_prompts.js"; //prompt_llm, reflectionInput, 
 import { postData } from '../../features/Image_generation/image_generation';;
-import {conversationTranscript} from '../../features/Speech_transcription/transcribings.js'
+import {conversationTranscript} from '../../features/Speech_transcription/transcribings.js';
+import {uidAgent1, uidAgent2} from '../../features/Serial_test/serial_test.js';
 
 document.getElementById('llm_test').addEventListener('click', pipelineStuff); //start functie llmTest, zodra op de knop is geklikt
 
+async function uidAgentValue(uid){
+  if (uid == '0xB9 0x4C 0x8B 0xFF'){
+    return 'Einstein';
+  } else if(uid == '0x23 0x32 0x7B 0xFC'){
+    return 'Socrates';
+  }
+}
+
 async function pipelineStuff(){
-  const agent1 = document.getElementById("prompt_input1").value
-  const agent2 = document.getElementById("prompt_input2").value
-  const agent3 = document.getElementById("prompt_input3").value
-  const agent4 = document.getElementById("prompt_input4").value
+  const agent1 = await uidAgentValue(uidAgent1);
+  console.log(agent1);
+  console.log(uidAgent1);
+  const agent2 = await uidAgentValue(uidAgent2);
+  const agent3 = await uidAgentValue(uidAgent1);
+  const agent4 = await uidAgentValue(uidAgent2);
+  // const agent1 = document.getElementById("prompt_input1").value
+  // const agent2 = document.getElementById("prompt_input2").value
+  // const agent3 = document.getElementById("prompt_input3").value
+  // const agent4 = document.getElementById("prompt_input4").value
   const agents = [[agent1, 'agent1'], [agent2, 'agent2'], [agent3, 'agent3'], [agent4, 'agent4']];
   console.log(agents);
   
