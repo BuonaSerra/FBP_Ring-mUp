@@ -5,6 +5,7 @@ import workflow from './workflow_api_v1.json' with {type: 'json'};
 export var responseId = ""; //lege variabele waarin de promptid wordt gezet
 export var remainingQueue;
 var Reflection = "";
+var Agent = "";
 
 //getting value from cfg slider and updating value in DOM
 /*export const cfgValue = document.getElementById('cfg_value');
@@ -92,10 +93,11 @@ export async function handleMessage(message) { //receives and sorts any event me
 
 
 //asynchrone functie om een post request te sturen naar de api
-export async function postData(agentPrompt, agentid, reflection) {
+export async function postData(agentPrompt, agentid, reflection, agent) {
   /*var promptInput = document.getElementById("prompt_input").value //get the value from the textarea prompt_input
   var cfgInput = document.getElementById("cfg_input").value //get the value from the number input cfg_input
   var seedInput = document.getElementById("seed_input") //get the value from the number input seed_input*/
+  Agent = agent;
   const agentId = agentid;
   const agentRef = reflection;
   workflow["6"]["inputs"]["text"] = agentPrompt;
@@ -218,11 +220,14 @@ export async function convertImage(outputImages) {
 
       const newDiv = document.createElement("div");
       const imageEl = document.createElement("img");
+      const agentEl = document.createTextNode(Agent);
       const reflectionEl = document.createTextNode(Reflection);
       imageEl.src = imageUrl; 
       newDiv.appendChild(imageEl);
+      newDiv.appendChild(agentEl);
       newDiv.appendChild(reflectionEl);
       document.body.appendChild(newDiv);
+      //for vue: create an array and append image, agent and reflection to it as a unit. Then, when I want to show the divs, go through the array with a for loop and create divs with flip card effect.
 
       //  const imageElement = document.createElement("img");
       //  imageElement.src = imageUrl;

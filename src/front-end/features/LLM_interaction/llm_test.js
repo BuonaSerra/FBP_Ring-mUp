@@ -78,7 +78,7 @@ async function llmTest([agent, agentid]) {
 
     const agentAnswer = agent_answer["choices"]["0"]["message"]["content"];
     
-    const answer = await llmPrompt(agentAnswer, agentId);
+    const answer = await llmPrompt(agentAnswer, agentId, agent);
     return answer, agentId;
     //return agentAnswer;
 
@@ -93,7 +93,7 @@ async function llmTest([agent, agentid]) {
 }
 
 
-async function llmPrompt(agentAnswer, agentid) {
+async function llmPrompt(agentAnswer, agentid, agent) {
   const url = 'http://127.0.0.1:1234/v1/chat/completions'; //api url + endpoint
   const agentId = agentid;
   const reflection = agentAnswer;
@@ -128,7 +128,7 @@ async function llmPrompt(agentAnswer, agentid) {
     //console.log(json["choices"]["0"]["message"]["content"]); //locatie van de response
 
     const agentPrompt = json["choices"]["0"]["message"]["content"];
-    const prompt = await postData(agentPrompt, agentId, reflection);
+    const prompt = await postData(agentPrompt, agentId, reflection, agent);
     return prompt, agentId;
 
     //return agentPrompt;
