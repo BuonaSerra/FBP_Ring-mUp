@@ -1,7 +1,7 @@
 import { prompt_llm, changeInput } from "./generation_prompts.js"; //prompt_llm, reflectionInput, 
 import { postData } from '../../features/Image_generation/image_generation';;
 import {conversationTranscript} from '../../features/Speech_transcription/transcribings.js';
-import {uidAgent1, uidAgent2} from '../../features/Serial_test/serial_test.js';
+import {uidAgent1, uidAgent2, uidAgent3, uidAgent4} from '../../features/Serial_test/serial_test.js';
 
 //document.getElementById('llm_test').addEventListener('click', pipelineStuff); //start functie llmTest, zodra op de knop is geklikt
 
@@ -18,8 +18,8 @@ export async function pipelineStuff(){
   console.log(agent1);
   console.log(uidAgent1);
   const agent2 = await uidAgentValue(uidAgent2);
-  const agent3 = await uidAgentValue(uidAgent1);
-  const agent4 = await uidAgentValue(uidAgent2);
+  const agent3 = await uidAgentValue(uidAgent3);
+  const agent4 = await uidAgentValue(uidAgent4);
   // const agent1 = document.getElementById("prompt_input1").value
   // const agent2 = document.getElementById("prompt_input2").value
   // const agent3 = document.getElementById("prompt_input3").value

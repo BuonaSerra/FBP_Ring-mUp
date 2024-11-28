@@ -4,6 +4,8 @@
 import {startRecording, stopRecording} from '../../features/Speech_transcription/transcribings.js';
 export var uidAgent1;
 export var uidAgent2;
+export var uidAgent3;
+export var uidAgent4;
 
 
 class LineBreakTransformer {
@@ -60,12 +62,20 @@ async function testIt () {
             stopRecording();
           }else{
             if(value.substring(0,7)=="reader1"){
-              console.log("it's reader 1: " + value.substring(8,value.length));
-              uidAgent1= value.substring(8,value.length);
+              console.log("it's reader 1: " + value.substring(7,value.length));
+              uidAgent1= value.substring(7,value.length);
             } else if(value.substring(0,7)=="reader2"){
-              console.log("it's reader 2: " + value.substring(8,value.length));
-              uidAgent2= value.substring(8,value.length);
+              console.log("it's reader 2: " + value.substring(7,value.length));
+              uidAgent2= value.substring(7,value.length);
+            } else if(value.substring(0,7)=="reader3"){
+              console.log("it's reader 3: " + value.substring(7,value.length));
+              uidAgent3= value.substring(7,value.length);
+            }else if(value.substring(0,7)=="reader4"){
+              console.log("it's reader 4: " + value.substring(7,value.length));
+              uidAgent4= value.substring(7,value.length);
             }
+            
+            
             
           }
         }
