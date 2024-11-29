@@ -56,10 +56,19 @@ async function testIt () {
           //console.log(value);
           if (value == "start"){
             console.log("start recording");
+            document.getElementById("recording").style.display = "block";
+            document.getElementById("start").style.display = "none";
             startRecording();
           }else if(value == "stop"){
             console.log("stop recording");
+            document.getElementById("reflecting").style.display = "block";
+            document.getElementById("recording").style.display = "none";
             stopRecording();
+            setTimeout(() => {
+              document.getElementById("reflecting").style.display = "none";
+              document.getElementById("results").style.display = "block";
+            }, 10000);
+            
           }else{
             if(value.substring(0,7)=="reader1"){
               console.log("it's reader 1: " + value.substring(7,value.length));

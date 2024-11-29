@@ -16,59 +16,24 @@
 
   </head>
   <body>
-    <!-- <label for="prompt_input1">Select an agent:</label>
-    <select name="agents" id="prompt_input1">
-      <option value="">--Please choose an option--</option>
-      <option value="Einstein">Einstein</option>
-      <option value="Socrates">Socrates</option>
-    </select>
+    <div id="start">
+      <button type="button" id="serial_test">Test Serial</button>
+      <!-- <button type="button" id="send_test">Send Serial</button> -->
+      <p hidden>Matching Arduino Mega device: <strong id="device-name" ></strong></p>
+    </div>
 
-    <label for="prompt_input2">Select an agent:</label>
-    <select name="agents" id="prompt_input2">
-      <option value="">--Please choose an option--</option>
-      <option value="Einstein">Einstein</option>
-      <option value="Socrates">Socrates</option>
-    </select>
+    <div id="recording">
+      <p>Recording</p>
+    </div>
 
-    <label for="prompt_input3">Select an agent:</label>
-    <select name="agents" id="prompt_input3">
-      <option value="">--Please choose an option--</option>
-      <option value="Einstein">Einstein</option>
-      <option value="Socrates">Socrates</option>
-    </select>
+    <div id="reflecting">
+      <p>reflecting</p>
+    </div>
 
-    <label for="prompt_input4">Select an agent:</label>
-    <select name="agents" id="prompt_input4">
-      <option value="">--Please choose an option--</option>
-      <option value="Einstein">Einstein</option>
-      <option value="Socrates">Socrates</option>
-    </select> -->
-    <!-- <textarea value="" id="input_reflection" name="input_reflection" placeholder="input reflection input here"></textarea> -->
-
+    <div id="results">
+      <p>Results</p>
+    </div>
     
-
-    <!--<label for="cfg_input">set cfg</label><br>
-    <input type="range" id="cfg_input" name="cfg_input" min="1" max="20" step="1" value="8"/>
-    <p>Strictheid: <output id="cfg_value"></output></p>
-    
-    <label for="seed_input">random seed</label><br>
-    <input type="checkbox" id="seed_input" name="seed_input" value="random">
-        
-    <button type="button" id="prompt_trigger">Generate image</button>-->
-    <button type="button" id="serial_test">Test Serial</button>
-    <!-- <button type="button" id="send_test">Send Serial</button> -->
-    <p>Matching Arduino Mega device: <strong id="device-name"></strong></p>
-
-    <!-- <button type="button" id="start_recording">Start Recording</button>
-
-    <button type="button" id="stop_recording">Stop Recording</button>
-  
-    <button type="button" id="llm_test">Start Pipeline</button> -->
-
-    <!-- <button type="button" id="transcript_test">Transcript test</button> -->
-
-    <!-- <img width= "1080" height= "720" id="generated_image"/> -->
-
     <script type="module" src="/src/front-end/renderer.js"></script>
   </body>
 </html>

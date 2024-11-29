@@ -1,5 +1,5 @@
 import { prompt_llm, changeInput } from "./generation_prompts.js"; //prompt_llm, reflectionInput, 
-import { postData } from '../../features/Image_generation/image_generation';;
+import { postData } from '../../features/image_generation/image_generation';;
 import {conversationTranscript} from '../../features/Speech_transcription/transcribings.js';
 import {uidAgent1, uidAgent2, uidAgent3, uidAgent4} from '../../features/Serial_test/serial_test.js';
 

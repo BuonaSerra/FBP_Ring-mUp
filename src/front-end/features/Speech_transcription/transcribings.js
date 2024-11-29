@@ -148,7 +148,6 @@ export const stopRecording = async () => {
     }
  
     recordedChunks.value = [];
- 
     await transcribe()
     pipelineStuff();
 }

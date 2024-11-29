@@ -44,7 +44,7 @@ export async function handleMessage(message) { //receives and sorts any event me
   if (typeof message === 'string') {
     message = JSON.parse(message);
 
-    console.log("RAW Message: ", message);
+    //console.log("RAW Message: ", message);
   }
   //console.log("function aangeroepen " + message.type)
   switch (message.type) {
@@ -218,15 +218,35 @@ export async function convertImage(outputImages) {
       //imageStuff = base64String;
      // document.getElementById("generated_image").src = imageUrl;
 
-      const newDiv = document.createElement("div");
+      const card = document.createElement("div");
+      card.classList.add("card");
+      const innerCard = document.createElement("div")
+      innerCard.classList.add("innerCard");
+      const frontCard = document.createElement("div");
+      frontCard.classList.add("frontCard");
+      const backCard = document.createElement("div");
+      backCard.classList.add("backCard");
+
+      const result = document.getElementById("results");
       const imageEl = document.createElement("img");
+      imageEl.classList.add("imageResult");
       const agentEl = document.createTextNode(Agent);
       const reflectionEl = document.createTextNode(Reflection);
-      imageEl.src = imageUrl; 
-      newDiv.appendChild(imageEl);
-      newDiv.appendChild(agentEl);
-      newDiv.appendChild(reflectionEl);
-      document.body.appendChild(newDiv);
+
+      imageEl.src = imageUrl;
+
+      result.appendChild(card);
+      card.appendChild(innerCard);
+      innerCard.appendChild(frontCard);
+      innerCard.appendChild(backCard);
+      frontCard.appendChild(imageEl);
+      backCard.appendChild(agentEl);
+      backCard.appendChild(reflectionEl);
+
+       
+      // result.appendChild(imageEl);
+      // result.appendChild(agentEl);
+      // result.appendChild(reflectionEl);
       //for vue: create an array and append image, agent and reflection to it as a unit. Then, when I want to show the divs, go through the array with a for loop and create divs with flip card effect.
 
       //  const imageElement = document.createElement("img");
