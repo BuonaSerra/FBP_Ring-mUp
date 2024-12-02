@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Laag_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232.98 184.21">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #fabd2e;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #1d1d1b;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+        stroke-linecap: round;
+        stroke-width: 6px;
+      }
+
+      .cls-1, .cls-2, .cls-4 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        stroke: #ed781a;
+      }
+
+      .cls-3 {
+        fill: none;
+      }
+
+      .cls-3, .cls-5 {
+        stroke: #b2d6bf;
+        stroke-linejoin: round;
+      }
+
+      .cls-4 {
+        fill: #fff;
+        stroke: #f4d7d9;
+      }
+
+      .cls-5 {
+        fill: #006966;
+      }
+    </style>
+  </defs>
+  <g id="Laag_1-2" data-name="Laag_1">
+    <path class="cls-5" d="M154.32,14.91v73.03c0,6.58-5.33,11.92-11.92,11.92H54.32l-34.87,40.64v-40.64h-4.53c-6.58,0-11.92-5.34-11.92-11.92V14.91c0-6.58,5.34-11.91,11.92-11.91h127.48c6.59,0,11.92,5.33,11.92,11.91Z"/>
+    <line class="cls-3" x1="28.33" y1="27.01" x2="128.99" y2="27.01"/>
+    <line class="cls-3" x1="28.33" y1="47.08" x2="128.99" y2="47.08"/>
+    <line class="cls-3" x1="28.33" y1="67.14" x2="128.99" y2="67.14"/>
+    <path class="cls-5" d="M78.66,55.62v73.03c0,6.58,5.33,11.92,11.92,11.92h88.08s34.87,40.64,34.87,40.64v-40.64h4.53c6.58,0,11.92-5.34,11.92-11.92V55.62c0-6.58-5.34-11.91-11.92-11.91h-127.48c-6.59,0-11.92,5.33-11.92,11.91Z"/>
+    <line class="cls-2" x1="103.99" y1="65.75" x2="204.65" y2="65.75"/>
+    <line class="cls-1" x1="103.99" y1="85.81" x2="204.65" y2="85.81"/>
+    <line class="cls-4" x1="103.99" y1="105.88" x2="204.65" y2="105.88"/>
+  </g>
+</svg>

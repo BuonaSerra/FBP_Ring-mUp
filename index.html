@@ -16,22 +16,26 @@
 
   </head>
   <body>
-    <div id="start">
-      <button type="button" id="serial_test">Test Serial</button>
+    <div id="start" >
+      <p class="stateTitle">[werktitel: schuif maar aan]</p>
+      <img id="startIcon" src = "../src/front-end/icons/start.svg" alt="Microphone"/>
+      <button type="button" id="serial_test">Start</button>
       <!-- <button type="button" id="send_test">Send Serial</button> -->
       <p hidden>Matching Arduino Mega device: <strong id="device-name" ></strong></p>
     </div>
 
     <div id="recording">
-      <p>Recording</p>
+      <p class="stateTitle">Recording...</p>
+      <img id="microphoneIcon" src = "../src/front-end/icons/microphone.svg" alt="Microphone"/>
     </div>
 
     <div id="reflecting">
-      <p>reflecting</p>
+      <p class="stateTitle">Reflecting...</p>
+      <img id="microphoneIcon" src = "../src/front-end/icons/reflecting.svg" alt="Microphone"/>
     </div>
 
     <div id="results">
-      <p>Results</p>
+      
     </div>
     
     <script type="module" src="/src/front-end/renderer.js"></script>
