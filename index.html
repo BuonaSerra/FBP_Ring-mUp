@@ -5,7 +5,7 @@
     <!--<meta http-equiv="Content-Security-Policy" content="connect-src 'self' http://127.0.0.1:8188 ws://127.0.0.1:8188 http://127.0.0.1:7860 http://127.0.0.1:1234 http://localhost:5173" > -->
     
 
-    <title>Zet ze aan tafel</title>
+    <title>Ring 'm Up</title>
 
     <script src="./src/front-end/features/LLM_interaction/llm_test.js" type="module"></script>
     <script src="./src/front-end/features/image_generation/image_generation.js" type="module"></script>
@@ -17,11 +17,16 @@
   </head>
   <body>
     <div id="start" >
-      <p class="stateTitle">[werktitel: schuif maar aan]</p>
-      <img id="startIcon" src = "../src/front-end/icons/start.svg" alt="Microphone"/>
+      <p class="stateTitle">[werktitel: Ring 'm Up]</p>
+      <!-- <img id="startIcon" src = "../src/front-end/icons/start.svg" alt="Start instructions"/> -->
       <button type="button" id="serial_test">Start</button>
       <!-- <button type="button" id="send_test">Send Serial</button> -->
       <p hidden>Matching Arduino Mega device: <strong id="device-name" ></strong></p>
+    </div>
+
+    <div id="instructions">
+      <p class="stateTitle">[werktitel: Ring 'm Up]</p>
+      <img id="startIcon" src = "../src/front-end/icons/start.svg" alt="Start instructions"/>
     </div>
 
     <div id="recording">
@@ -31,7 +36,7 @@
 
     <div id="reflecting">
       <p class="stateTitle">Reflecting...</p>
-      <img id="microphoneIcon" src = "../src/front-end/icons/reflecting.svg" alt="Microphone"/>
+      <img id="microphoneIcon" src = "../src/front-end/icons/reflecting.svg" alt="conversation clouds"/>
     </div>
 
     <div id="results">

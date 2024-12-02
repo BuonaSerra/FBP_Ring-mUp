@@ -17,6 +17,9 @@ const createWindow = () => {
     },
   });
 
+  mainWindow.setMenuBarVisibility(false);
+  mainWindow.maximize();
+
   //SERIAL START code from Electron example https://www.electronjs.org/docs/latest/tutorial/devices#web-serial-api
 
   mainWindow.webContents.session.on('select-serial-port', (event, portList, webContents, callback) => {

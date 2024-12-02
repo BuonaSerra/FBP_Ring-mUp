@@ -230,8 +230,12 @@ export async function convertImage(outputImages) {
       const result = document.getElementById("results");
       const imageEl = document.createElement("img");
       imageEl.classList.add("imageResult");
-      const agentEl = document.createTextNode(Agent);
-      const reflectionEl = document.createTextNode(Reflection);
+      const agentEl = document.createElement("p");
+      agentEl.innerText = Agent;
+      agentEl.classList.add("agentResult");
+      const reflectionEl = document.createElement("p");
+      reflectionEl.innerText = Reflection;
+      reflectionEl.classList.add("reflectionResult");
 
       imageEl.src = imageUrl;
 

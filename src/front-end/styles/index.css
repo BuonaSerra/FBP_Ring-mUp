@@ -1,5 +1,5 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+  font-family: Effra, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif;
   margin: auto;
   color: #B2D6BF;
@@ -36,6 +36,15 @@ button:hover {
   display: block;
 }
 
+#instructions{
+  display: none;
+}
+
+#serial_test{
+  display: block;
+  margin: auto;
+}
+
 #recording {
   display: none;
 }
@@ -46,12 +55,16 @@ button:hover {
 
 #results {
   display: none;
+  flex-wrap: wrap;
+  /* align-content: space-between; */
+  margin: 0 auto;
+  justify-content: center;
 }
 
 .Title{
   text-align: center;
   font-weight: bold;
-  font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI',  Helvetica,
+  font-family: Effra, Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI',  Helvetica,
     Arial, sans-serif;
   font-size: 10vw;
 }
@@ -59,7 +72,7 @@ button:hover {
 .stateTitle{
   text-align: center;
   font-weight: bold;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+  font-family: Effra, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif;
   font-size: 5vw;
 }
@@ -80,13 +93,11 @@ button:hover {
   margin-right: auto;
 }
 
-/*w3 schools example*/
 .card {
-  background-color: transparent;
-  width: 700px;
-  height: 394px;
-  margin: 20px;
-  /*perspective: 1000px;*/
+  aspect-ratio: 3/2;
+  width: 36vw;
+  height: auto;
+  margin: 1% 2%;
 }
 
 .innerCard {
@@ -98,8 +109,13 @@ button:hover {
   transform-style: preserve-3d;
 }
 
-.card:hover .innerCard {
-  transform: rotateY(180deg);
+.card:hover .backCard {
+  /* transform: rotateY(180deg); */
+  opacity: 1;
+}
+.card:hover .frontCard {
+  /* transform: rotateY(180deg); */
+  opacity: 0.2;
 }
 
 .frontCard, .backCard {
@@ -116,12 +132,31 @@ button:hover {
 } */
 
 .backCard {
-  background-color: #B2D6BF;
+  /* background-color: #B2D6BF;
   color: #006966;
-  transform: rotateY(180deg);
+  transform: rotateY(180deg); */
+
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 .imageResult{
   width: 100%;
-  height: auto;
+  height: 100%;
+}
+
+.agentResult{
+  font-size: 3rem;
+  font-weight: bold;
+}
+.reflectionResult{
+  font-size: 1rem;
+  font-weight: normal;
+  margin: 20px;
 }

@@ -29,6 +29,8 @@ class LineBreakTransformer {
   }
 }
 async function testIt () {
+  document.getElementById("instructions").style.display = "block";
+  document.getElementById("start").style.display = "none";
     const filters = [
         { usbVendorId: 0x2341, usbProductId: 0x0042 }
     ]
@@ -57,7 +59,7 @@ async function testIt () {
           if (value == "start"){
             console.log("start recording");
             document.getElementById("recording").style.display = "block";
-            document.getElementById("start").style.display = "none";
+            document.getElementById("instructions").style.display = "none";
             document.getElementById("results").style.display = "none";
             startRecording();
           }else if(value == "stop"){
@@ -68,7 +70,7 @@ async function testIt () {
             stopRecording();
             setTimeout(() => {
               document.getElementById("reflecting").style.display = "none";
-              document.getElementById("results").style.display = "block";
+              document.getElementById("results").style.display = "flex";
             }, 10000); //3min: 180000 ms
             
           }else{
