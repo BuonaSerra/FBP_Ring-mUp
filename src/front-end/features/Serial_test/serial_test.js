@@ -71,7 +71,7 @@ async function testIt () {
             setTimeout(() => {
               document.getElementById("reflecting").style.display = "none";
               document.getElementById("results").style.display = "flex";
-            }, 10000); //3min: 180000 ms
+            }, 180000); //3min: 180000 ms
             
           }else{
             if(value.substring(0,7)=="reader1"){

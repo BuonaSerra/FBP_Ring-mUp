@@ -6,11 +6,28 @@ import {uidAgent1, uidAgent2, uidAgent3, uidAgent4} from '../../features/Serial_
 //document.getElementById('llm_test').addEventListener('click', pipelineStuff); //start functie llmTest, zodra op de knop is geklikt
 
 async function uidAgentValue(uid){
-  if (uid == '0xB9 0x4C 0x8B 0xFF'){
+  if (uid == '0x42 0x7D 0xA4 0xF3'){
     return 'Einstein';
-  } else if(uid == '0x23 0x32 0x7B 0xFC'){
-    return 'Socrates';
+  } else if(uid == '0x02 0x49 0xA4 0xF3'){
+    return 'Bruno Latour';
+  } else if(uid == '0x32 0xA2 0xA4 0xF3'){
+    return 'Frida Kahlo';
+  } else if(uid == '0xF2 0xA1 0xA4 0xF3'){
+    return 'Malala Yousafzai';
+  } else if(uid == '0x52 0x9A 0xA4 0xF3'){
+    return 'Astrid Lindgren';
+  } else if(uid == '0x62 0x9C 0xA4 0xF3'){
+    return 'Hannah Arendt';
+  } else if(uid == '0x92 0x9A 0xA4 0xF3'){
+    return 'Jane Goodall';
+  } else if(uid == '0xA2 0x76 0xA4 0xF3'){
+    return 'Yuval Noah Harrari';
+  } else if(uid == '0xC2 0x99 0xA4 0xF3'){
+    return 'Michelle Schenandoah';
+  } else if(uid == '0xB2 0xA0 0xA4 0xF3'){
+    return 'Nelson Mandela';
   }
+  
 }
 
 export async function pipelineStuff(){
@@ -101,7 +118,7 @@ async function llmPrompt(agentAnswer, agentid, agent) {
   var data = {
     "model": "gemma-2-27b-it",
     "messages": [
-      { "role": "user", "content": `Answer only in English. Write a prompt to be used for stable diffusion 3, based on the following input: ${agentAnswer} Answer only with the prompt. Answer ONLY with the prompt.` },
+      { "role": "user", "content": `Answer only in English. Write a prompt to be used for stable diffusion 3, based on the following input: ${agentAnswer} Do not depict faces, or text. Answer only with the prompt. Answer ONLY with the prompt.` },
     ],
     "stream": false,
   };
