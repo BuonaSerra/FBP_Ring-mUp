@@ -15,7 +15,7 @@ async function uidAgentValue(uid){
   } else if(uid == '0xF2 0xA1 0xA4 0xF3'){
     return 'Malala Yousafzai';
   } else if(uid == '0x52 0x9A 0xA4 0xF3'){
-    return 'Astrid Lindgren';
+    return 'Elon Musk';
   } else if(uid == '0x62 0x9C 0xA4 0xF3'){
     return 'Hannah Arendt';
   } else if(uid == '0x92 0x9A 0xA4 0xF3'){
@@ -25,7 +25,9 @@ async function uidAgentValue(uid){
   } else if(uid == '0xC2 0x99 0xA4 0xF3'){
     return 'Michelle Schenandoah';
   } else if(uid == '0xB2 0xA0 0xA4 0xF3'){
-    return 'Nelson Mandela';
+    return 'Kim Kardashian';
+  } else if(uid == '0xB9 0x4C 0x8B 0xFF'){
+    return 'Margaret Thatcher';
   }
   
 }
@@ -118,7 +120,7 @@ async function llmPrompt(agentAnswer, agentid, agent) {
   var data = {
     "model": "gemma-2-27b-it",
     "messages": [
-      { "role": "user", "content": `Answer only in English. Write a prompt to be used for stable diffusion 3, based on the following input: ${agentAnswer} Do not depict faces, or text. Answer only with the prompt. Answer ONLY with the prompt.` },
+      { "role": "user", "content": `Answer only in English. Write a prompt to be used for stable diffusion 3, based on the following input: ${agentAnswer} Refrain from depicting faces, or text. Answer only with the prompt.` },
     ],
     "stream": false,
   };
