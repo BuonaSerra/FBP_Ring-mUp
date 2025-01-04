@@ -3,8 +3,8 @@ import { postData } from '../../features/image_generation/image_generation';;
 import {conversationTranscript} from '../../features/Speech_transcription/transcribings.js';
 import {uidAgent1, uidAgent2, uidAgent3, uidAgent4} from '../../features/Serial_test/serial_test.js';
 
-//document.getElementById('llm_test').addEventListener('click', pipelineStuff); //start functie llmTest, zodra op de knop is geklikt
 
+//read the uid and convert it to an actor name
 async function uidAgentValue(uid){
   if (uid == '0x42 0x7D 0xA4 0xF3'){
     return 'Einstein';
@@ -21,7 +21,7 @@ async function uidAgentValue(uid){
   } else if(uid == '0x92 0x9A 0xA4 0xF3'){
     return 'Jane Goodall';
   } else if(uid == '0xA2 0x76 0xA4 0xF3'){
-    return 'Yuval Noah Harrari';
+    return 'Yuval Noah Harari';
   } else if(uid == '0xC2 0x99 0xA4 0xF3'){
     return 'Michelle Schenandoah';
   } else if(uid == '0xB2 0xA0 0xA4 0xF3'){
@@ -32,6 +32,7 @@ async function uidAgentValue(uid){
   
 }
 
+//create an array with agent name and id, and trigger llmTest()
 export async function pipelineStuff(){
   const agent1 = await uidAgentValue(uidAgent1);
   console.log(agent1);
@@ -39,10 +40,6 @@ export async function pipelineStuff(){
   const agent2 = await uidAgentValue(uidAgent2);
   const agent3 = await uidAgentValue(uidAgent3);
   const agent4 = await uidAgentValue(uidAgent4);
-  // const agent1 = document.getElementById("prompt_input1").value
-  // const agent2 = document.getElementById("prompt_input2").value
-  // const agent3 = document.getElementById("prompt_input3").value
-  // const agent4 = document.getElementById("prompt_input4").value
   const agents = [[agent1, 'agent1'], [agent2, 'agent2'], [agent3, 'agent3'], [agent4, 'agent4']];
   console.log(agents);
   
@@ -50,25 +47,20 @@ export async function pipelineStuff(){
     await llmTest(Agent);
     
   }
-  // for (let i = 0; i < agent.length; ++i ){
-    
-  // }
   
 }
 
-
+//send a post request with the prompt and actor as input. The actor name defines which prompt is sent form the generation_prompt.js file
 async function llmTest([agent, agentid]) {
-  const url = 'http://127.0.0.1:1234/v1/chat/completions'; //api url + endpoint
+  const url = 'http://localhost:11434/api/chat'; //api url + endpoint
 
-  //const AgentChoice = document.getElementById("prompt_input").value
-  //const inputReflection = document.getElementById("input_reflection").value
   const inputReflection = conversationTranscript;
   const agentId = agentid;
 
   changeInput(inputReflection);
 
   var data = {
-    "model": "gemma-2-27b-it",
+    "model": "gemma2:27B", 
     "messages": [
       prompt_llm[`${agent}`],
     ],
@@ -79,7 +71,7 @@ async function llmTest([agent, agentid]) {
     const request2 = new Request(url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", //From debugging with GPT-4o;
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
@@ -92,14 +84,10 @@ async function llmTest([agent, agentid]) {
     }
 
     const agent_answer = await response.json();
-    //console.log(agent_answer);
-    //console.log(agent_answer["choices"]["0"]["message"]["content"]); //locatie van de response
-
-    const agentAnswer = agent_answer["choices"]["0"]["message"]["content"];
+    const agentAnswer = agent_answer["message"]["content"]; 
     
     const answer = await llmPrompt(agentAnswer, agentId, agent);
     return answer, agentId;
-    //return agentAnswer;
 
 
 
@@ -111,14 +99,14 @@ async function llmTest([agent, agentid]) {
 
 }
 
-
+//with the response from llmTest, send a post request with the response as input for the prompt, generating a prompt for a diffusion model
 async function llmPrompt(agentAnswer, agentid, agent) {
-  const url = 'http://127.0.0.1:1234/v1/chat/completions'; //api url + endpoint
+  const url = 'http://localhost:11434/api/chat'; //api url + endpoint
   const agentId = agentid;
   const reflection = agentAnswer;
 
   var data = {
-    "model": "gemma-2-27b-it",
+    "model": "gemma2:27B", 
     "messages": [
       { "role": "user", "content": `Answer only in English. Write a prompt to be used for stable diffusion 3, based on the following input: ${agentAnswer} Refrain from depicting faces, or text. Answer only with the prompt.` },
     ],
@@ -129,7 +117,7 @@ async function llmPrompt(agentAnswer, agentid, agent) {
     const request3 = new Request(url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", //From debugging with GPT-4o;
+        "Content-Type": "application/json", 
       },
       body: JSON.stringify(data),
 
@@ -143,14 +131,10 @@ async function llmPrompt(agentAnswer, agentid, agent) {
     }
 
     const json = await response.json();
-    //console.log(json);
-    //console.log(json["choices"]["0"]["message"]["content"]); //locatie van de response
 
-    const agentPrompt = json["choices"]["0"]["message"]["content"];
+    const agentPrompt = json["message"]["content"]; 
     const prompt = await postData(agentPrompt, agentId, reflection, agent);
     return prompt, agentId;
-
-    //return agentPrompt;
 
 
   } catch (error) {
@@ -160,32 +144,3 @@ async function llmPrompt(agentAnswer, agentid, agent) {
 
 
 }
-
-
-/*async function llmTest() {
-    const url = 'http://127.0.0.1:1234/v1/models'; //api url + enpoint (/prompt), zie server.py in comfyui om andere endpoints te vinden
-    try {
-        const request2 = new Request(url, {
-    method: "GET",
-    body: JSON.stringify(),
-    
-  });
-  
-  console.log("LLM test aangeroepen");
-
-  const response = await fetch(request2);
-  if (!response.ok) {
-    throw new Error(`Response status: ${response.status}`);
-  }
-
-  const json = await response.json();
-  console.log(json);
-  return json;
-  
-} catch (error) {
-  console.error(error.message);
-}
-
-    
-     
-  }*/

@@ -1,4 +1,4 @@
-//This code is edited from original typescript code by Wesley Hartogs
+//This code builts upon the original typescript code of WesWeCan. (2024b). volgspot-generative-agents-forge/src/front-end/assets/ComfyClient.ts at main · WesWeCan/volgspot-generative-agents-forge. GitHub. https://github.com/WesWeCan/volgspot-generative-agents-forge/blob/main/src/front-end/assets/ComfyClient.ts
 import workflow from './workflow_api_v1.json' with {type: 'json'};
 
 
@@ -7,24 +7,14 @@ export var remainingQueue;
 var Reflection = "";
 var Agent = "";
 
-//getting value from cfg slider and updating value in DOM
-/*export const cfgValue = document.getElementById('cfg_value');
-export const cfgSlider = document.getElementById('cfg_input');
-cfgValue.textContent = cfgSlider.value; //update cfg value constantly, so it gives live feedback on the slider
-cfgSlider.addEventListener("input", (event) => {
-  cfgValue.textContent = event.target.value;
-});*/
 
-//document.getElementById('prompt_trigger').addEventListener('click', postData); //start functie postData, zodra op de knop is geklikt
 
-//open a websocket to be able to get status/execution messages
 export const serverUrl = "127.0.0.1:8188";
-//export const clientId = 5; //"agent-client-" + Math.random().toString(36).substring(2, 15);
 let ws;
 var datalog = [];
 
 
-
+//open a websocket to be able to get status/execution messages
 function openWebSocket(clientId) {
   ws = new WebSocket(`ws://${serverUrl}/ws?clientId=${clientId}`);
   ws.onopen = () => {
@@ -43,22 +33,16 @@ function openWebSocket(clientId) {
 export async function handleMessage(message) { //receives and sorts any event message; depending on the case as defined below, a certain action is executed.
   if (typeof message === 'string') {
     message = JSON.parse(message);
-
-    //console.log("RAW Message: ", message);
   }
-  //console.log("function aangeroepen " + message.type)
   switch (message.type) {
     case 'executing':
-      //console.log("Executing...", message.data);
       if (message.data.node == null) {
         console.log("Execution done");
         console.log('start history');
-        const imagesOutput = (await getImages(responseId));
+        const imagesOutput = (await getImages(responseId)); //if the execution of the image generation is done, retrieve the images and execute convertImage to display the image in the DOM
         console.log(imagesOutput);
         convertImage(imagesOutput);
       }
-
-      //alert("ComfyUI is done executing");
       break;
     case 'execution_start':
       console.log("Execution started...", message.data);
@@ -69,12 +53,8 @@ export async function handleMessage(message) { //receives and sorts any event me
     case 'status':
       console.log("Status: ", message.data);
       console.log("Queue Remaining", message.data.status.exec_info.queue_remaining);
-      if (remainingQueue ==1  && message.data.status.exec_info.queue_remaining == 0) { //AANDACHT: bij gebrek aan message types is dit een oplossing voor later!! Dit is een workaround.
-        // console.log('start history');
-        // const imagesOutput = (await getImages(responseId));
-        // console.log(imagesOutput);
-        // convertImage(imagesOutput);
-        //console.log(imageSrc);
+      if (remainingQueue ==1  && message.data.status.exec_info.queue_remaining == 0) { 
+  
       } else {
         remainingQueue = message.data.status.exec_info.queue_remaining;
       }
@@ -83,7 +63,6 @@ export async function handleMessage(message) { //receives and sorts any event me
       console.log("Execution cached...", message.data);
       break;
     case 'progress':
-      //console.log("Progress: ", `${message.data.value / message.data.max * 100}%`);
       break;
     default:
       console.log("Unknown message type: ", message);
@@ -92,28 +71,17 @@ export async function handleMessage(message) { //receives and sorts any event me
 }
 
 
-//asynchrone functie om een post request te sturen naar de api
+//asynchronous function to send a post request with the prompt as input
 export async function postData(agentPrompt, agentid, reflection, agent) {
-  /*var promptInput = document.getElementById("prompt_input").value //get the value from the textarea prompt_input
-  var cfgInput = document.getElementById("cfg_input").value //get the value from the number input cfg_input
-  var seedInput = document.getElementById("seed_input") //get the value from the number input seed_input*/
   Agent = agent;
   const agentId = agentid;
   const agentRef = reflection;
   workflow["6"]["inputs"]["text"] = agentPrompt;
-  //workflow["6"]["inputs"]["text"] = promptInput; //input the prompt value into the right JSON object name
-  //workflow["3"]["inputs"]["cfg"] = cfgInput; //input the cfg value into the right JSON object name
 
-  /*if (seedInput.checked == true){ //checkt of de seedinput checkbox op random staat. Als dat zo is, genereert het een random nummer tussen 1 en 987654321 als seed. Anders is de seed 2.
-    workflow["3"]["inputs"]["seed"] = Math.floor(Math.random() * 9876543210) + 1; 
-  } else {
-    workflow["3"]["inputs"]["seed"] = 2;
-  }*/
-
-  const url = 'http://127.0.0.1:8188/prompt'; //api url + enpoint (/prompt), zie server.py in comfyui om andere endpoints te vinden
-  const clientId = agentid//randomUUID() //kan berekend worden, even in duiken
+  const url = 'http://127.0.0.1:8188/prompt'; //api url + enpoint (/prompt)
+  const clientId = agentid
   try {
-    const p = { prompt: workflow, client_id: clientId }; //combineer workflow met client id
+    const p = { prompt: workflow, client_id: clientId }; //combine workflow and clientId to create a valid post request
     const request1 = new Request(url, {
       method: "POST",
       body: JSON.stringify(p),
@@ -128,7 +96,6 @@ export async function postData(agentPrompt, agentid, reflection, agent) {
     console.log(json);
     responseId = json['prompt_id']
     Reflection = reflection;
-    //console.log(responseId, agentId, agentRef);
     datalog.push([agentId, responseId, agentRef]);
     console.log(datalog);
 
@@ -172,9 +139,6 @@ export async function getHistory(promptId) {
 export async function getImages(promptId) {
   const outputImages = {};
   const history = (await getHistory(promptId))[promptId];
-  //console.log(history);
-  //const nodeOutput = history[promptId];
-  //console.log(nodeOutput);
   for (const nodeId in history['outputs']) {
     const nodeOutput = history['outputs'][nodeId];
     if ('images' in nodeOutput) {
@@ -200,7 +164,6 @@ export async function getImage(filename, subfolder, folderType) {
 
 //convert arraybuffer to base64 and insert as source into html image display
 export async function convertImage(outputImages) {
-  //const imageStuff = "";
   console.log(outputImages);
   for (const nodeId in outputImages) {
     const imageData = outputImages[nodeId];
@@ -212,12 +175,8 @@ export async function convertImage(outputImages) {
       const base64String = btoa(binaryString);
       // Create the data URL
       const imageUrl = `data:image/jpeg;base64,${base64String}`;
-      //console.log(imageUrl);
-      //console.log(imageUrl);
-      //this.callback(imageUrl);
-      //imageStuff = base64String;
-     // document.getElementById("generated_image").src = imageUrl;
 
+      //create a div element with the image and its corresponding reflection and actorid
       const card = document.createElement("div");
       card.classList.add("card");
       const innerCard = document.createElement("div")
@@ -248,18 +207,7 @@ export async function convertImage(outputImages) {
       backCard.appendChild(reflectionEl);
 
        
-      // result.appendChild(imageEl);
-      // result.appendChild(agentEl);
-      // result.appendChild(reflectionEl);
-      //for vue: create an array and append image, agent and reflection to it as a unit. Then, when I want to show the divs, go through the array with a for loop and create divs with flip card effect.
-
-      //  const imageElement = document.createElement("img");
-      //  imageElement.src = imageUrl;
-      // imageElement.style.width = "100%";
-      // imageElement.style.height = "auto";
-      //  document.body.appendChild(imageElement);
     }
 
   }
-  //return imageStuff;
 }

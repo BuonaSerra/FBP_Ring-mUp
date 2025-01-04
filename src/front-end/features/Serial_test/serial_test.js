@@ -1,13 +1,14 @@
 
 
-//code from Google dev example https://developer.chrome.com/docs/capabilities/serial#read-port and electron example https://www.electronjs.org/docs/latest/tutorial/devices#web-serial-api
+
 import {startRecording, stopRecording} from '../../features/Speech_transcription/transcribings.js';
 export var uidAgent1;
 export var uidAgent2;
 export var uidAgent3;
 export var uidAgent4;
 
-
+//code from Google dev example: Beaufort, F. (2020). Read from and write to a serial port. Chrome for Developers. https://developer.chrome.com/docs/capabilities/serial#read-port 
+//license in LICENSE.txt
 class LineBreakTransformer {
   constructor() {
     // A container for holding stream data until a new line.
@@ -28,6 +29,7 @@ class LineBreakTransformer {
     controller.enqueue(this.chunks);
   }
 }
+//code derived fromelectron example: OpenJS Foundation. (2023). Device Access | Electron. Electronjs.org. https://www.electronjs.org/docs/latest/tutorial/devices#web-serial-api
 async function testIt () {
   document.getElementById("instructions").style.display = "block";
   document.getElementById("start").style.display = "none";
@@ -54,8 +56,7 @@ async function testIt () {
             break;
           }
           
-          // value is a Uint8Array.
-          //console.log(value);
+          //code by Serra van Santen
           if (value == "start"){
             console.log("start recording");
             document.getElementById("recording").style.display = "block";
@@ -93,28 +94,15 @@ async function testIt () {
           }
         }
         
-        // const textDecoder = new TextDecoderStream();
-        // const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
-        // const reader = textDecoder.readable.getReader();
-        // while (true) {
-        //     const { value, done } = await reader.read();
-        //     if (done) {
-        //       // Allow the serial port to be closed later.
-        //       reader.releaseLock();
-        //       break;
-        //     }
-        //     // value is a Uint8Array.
-        //     console.log(value);
-        //   }
+        
         const portInfo = port.getInfo()
-        //document.getElementById('device-name').innerHTML = `vendorId: ${portInfo.usbVendorId} | productId: ${portInfo.usbProductId} `
+        
       } catch (ex) {
         if (ex.name === 'NotFoundError') {
             console.error('No device found');
-          //document.getElementById('device-name').innerHTML = 'Device NOT found'
-         } //else {
-        //   document.getElementById('device-name').innerHTML = ex
-        // }
+          
+         } 
+        
       }
     }
 

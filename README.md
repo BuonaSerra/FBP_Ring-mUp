@@ -1,0 +1,2 @@
+# Ring 'm Up
+Ring ‘m up is a hybrid interface, which uses generative AI to add a variety of perspectives to the table and infuse the conversation with open-ended qualities. This repository consists of the digital interface and pipeline of the design.

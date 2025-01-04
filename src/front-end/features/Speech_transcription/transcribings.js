@@ -1,50 +1,16 @@
-//code altered from original typescript code of Wesley Hartogs
+//This code builds upon the original typescript code of WesWeCan. (2024). mu-transformatielab/src/front-end/components/Recording.vue at main · WesWeCan/mu-transformatielab. GitHub. https://github.com/WesWeCan/mu-transformatielab/blob/main/src/front-end/components/Recording.vue
 import { pipelineStuff } from '../../features/LLM_interaction/llm_test.js';
 import { onMounted, ref, defineProps, defineEmits } from 'vue';
 import { pipeline, env } from '@huggingface/transformers';
 
 env.allowLocalModels = false;
 env.allowRemoteModels = true;
-
-/*const transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisper-base', {
-    dtype: {
-        encoder_model: 'fp32',
-        decoder_model_merged: 'fp32',
-    },
-    device: 'webgpu'
-});
-const url = 'https://huggingface.co/datasets/Xenova/transformers.js-docs/resolve/main/jfk.wav';
-const output = await transcriber(url);
-console.log(output);*/
-
-// env.useBrowserCache = false;
- 
-
-// env.backends.onnx.wasm.wasmPaths = wasmFile;
- 
-//const transcriber = ref(null);
  
 const loadingModel = ref(false);
 var conversationTranscript = ''; 
  
-//const selectedWords = ref<string[]>([]);
-//const availableWords = ref<string[]>([]);
 const numTranscribed = ref(0);
- 
-const props = defineProps({ 
-    language: {
-        type: String,
-        required: true
-    },
-    uuid: {
-        type: String,
-        required: true
-    }
-});
- 
-const emit = defineEmits(['finish', 'cancel']);
 
- 
 onMounted(async () => {
     numTranscribed.value = 0;
     console.log('Recording.vue mounted');
@@ -160,9 +126,6 @@ const transcribe = async () => {
     transcribeOutput.value = '';
  
     const url = playback.value.src;
-    const duration = playback.value.duration;
- 
-    const start = performance.now();
  
     try {
         let tempOutput = await transcriber(url, {
@@ -181,7 +144,6 @@ const transcribe = async () => {
     }
  
  
-    const end = performance.now();
  
     console.log(transcribeOutput.value);
     numTranscribed.value++;
@@ -190,6 +152,3 @@ const transcribe = async () => {
 }
 
 export {conversationTranscript};
-
-// document.getElementById('start_recording').addEventListener('click', startRecording);
-// document.getElementById('stop_recording').addEventListener('click', stopRecording);

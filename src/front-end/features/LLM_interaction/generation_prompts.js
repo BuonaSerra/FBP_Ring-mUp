@@ -1,5 +1,3 @@
-//export var reflectionInput = "";
-
 var prompt_llm;
 
 var prompts;
@@ -39,8 +37,8 @@ export async function changeInput (inputReflection){
             "role": "user", "content":`Schrijf een korte reflectie en eindig met advies over het volgende gesprek: ${reflectionInput} Schrijf het in 1 paragraaf (maximaal 1000 tekens). Schrijf het vanuit het perspectief van Jane Goodall. Schrijf het bericht zoals de persoon het zelf zou schrijven. Antwoord alleen in het Nederlands. Antwoord alleen met het bericht.`
         },
 
-        "Yuval Noah Harrari": {
-            "role": "user", "content":`Schrijf een korte reflectie en eindig met advies over het volgende gesprek: ${reflectionInput} Schrijf het in 1 paragraaf (maximaal 1000 tekens). Schrijf het vanuit het perspectief van Yuval Noah Harrari. Schrijf het bericht zoals de persoon het zelf zou schrijven. Antwoord alleen in het Nederlands. Antwoord alleen met het bericht.`
+        "Yuval Noah Harari": {
+            "role": "user", "content":`Schrijf een korte reflectie en eindig met advies over het volgende gesprek: ${reflectionInput} Schrijf het in 1 paragraaf (maximaal 1000 tekens). Schrijf het vanuit het perspectief van Yuval Noah Harari. Schrijf het bericht zoals de persoon het zelf zou schrijven. Antwoord alleen in het Nederlands. Antwoord alleen met het bericht.`
         },
 
         "Michelle Schenandoah": {
